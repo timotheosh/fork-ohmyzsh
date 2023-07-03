@@ -1,0 +1,36 @@
+#compdef ros
+
+local curcontext="$curcontext" state line
+typeset -A opt_args
+
+local -a options
+options=(help:"Show usage."
+         run:"Run repl"
+         install:"Install a given implementation or a system for roswell environment"
+         update:"Update installed systems."
+         build:"Make executable from script."
+         use:"Change default implementation."
+         init:"Creates a new ros script, optionally based on a template."
+         fmt:"Indent lisp source."
+         list:"List Information"
+         template:"Manage templates"
+         delete:"Delete installed implementations"
+         config:"Get and set options"
+         version:"Show the roswell version information")
+
+_arguments -s -S \
+    {-h,--help}"[show help]"                \
+    '(-): :->command'                       \
+    '(-)*:: :->option-or-argument'          \
+    && return 0;
+
+case $state in
+    (command)
+        _describe 'commands' options ;;
+    (option-or-argument)
+        case $words[1] in
+            s*)
+                _files
+                ;;
+        esac
+esac
