@@ -1,0 +1,48 @@
+#compdef pijul
+
+local curcontext="$curcontext" state line
+typeset -A opt_args
+
+local -a options
+options=(add:"Adds a path to the tree"
+         apply:"Applies changes to a channel"
+         archive:"Creates an archive of the repository"
+         change:"Shows information about a particular change"
+         channel:"Manages different channels"
+         clone:"Clones an existing pijul repository"
+         credit:"Shows which change last affected each line of the given file(s)"
+         debug:""
+         diff:"Shows difference between two channels/changes"
+         fork:"Create a new channel"
+         help:"Print this message or the help of the given subcommand(s)"
+         init:"Initializes an empty pijul repository"
+         key:"Key generation and management"
+         list:"Lists files tracked by pijul"
+         log:"Show the entire log of changes"
+         move:"Moves a file in the working copy and the tree"
+         pull:"Pulls changes from a remote upstream"
+         push:"Pushes changes to a remote upstream"
+         record:"Creates a new change"
+         remote:"Manages remote repositories"
+         remove:"Removes a file from the tree of tracked files (`pijul record` will then record this as a deletion)"
+         reset:" Resets the working copy to the last recorded change"
+         tag:" Manage tags (create tags, check out a tag)"
+         unrecord:" Unrecords a list of changes")
+
+_arguments -s -S \
+    {-h,--help}"[show help]"                     \
+    {-V,--version}"[show version information]"    \
+    '(-): :->command'                            \
+    '(-)*:: :->option-or-argument'               \
+    && return 0;
+
+case $state in
+    (command)
+        _describe 'commands' options ;;
+    (option-or-argument)
+        case $words[1] in
+            s*)
+                _files
+                ;;
+        esac
+esac

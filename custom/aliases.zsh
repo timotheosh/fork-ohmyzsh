@@ -7,10 +7,12 @@ if [ ${SYSTEM} = "NetBSD" ];then
     fi
 elif [ ${SYSTEM} = "FreeBSD" ];then
     alias ls='ls -FG'
+    EMACS_SOCKET=/tmp/emacs1
 else
     alias ls='ls --color=tty -F'
+    EMACS_SOCKET=emacs1
 fi
-EMACS_SOCKET=emacs1
+
 if [[ -n $INSIDE_EMACS ]];then
     alias e="emacsclient -s ${EMACS_SOCKET} -n"
     alias ec="emacsclient -s ${EMACS_SOCKET} -n"
