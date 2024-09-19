@@ -11,6 +11,7 @@ elif [ ${SYSTEM} = "FreeBSD" ];then
 else
     alias ls='ls --color=tty -F'
     EMACS_SOCKET=emacs1
+    TERMEMACS_SOCKET=termemacs1
 fi
 
 if [[ -n $INSIDE_EMACS ]];then
@@ -19,7 +20,7 @@ if [[ -n $INSIDE_EMACS ]];then
     alias vi="emacsclient -s ${EMACS_SOCKET} -n"
     alias dir="emacsclient -s -s ${EMACS_SOCKET} -ne '(dired \"./\")'"
 else
-    alias e="emacsclient -s ${EMACS_SOCKET} -tc"
+    alias e="emacsclient -s ${TERMEMACS_SOCKET} -tc"
     alias ec="emacsclient -s ${EMACS_SOCKET} -nc"
 fi
 
