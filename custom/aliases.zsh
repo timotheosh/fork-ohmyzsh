@@ -21,6 +21,7 @@ if [[ -n $INSIDE_EMACS ]];then
     alias dir="emacsclient -s -s ${EMACS_SOCKET} -ne '(dired \"./\")'"
 else
     alias e="emacsclient -s ${TERMEMACS_SOCKET} -tc"
+    alias vi="emacsclient -s ${TERMEMACS_SOCKET} -tc"
     alias ec="emacsclient -s ${EMACS_SOCKET} -nc"
 fi
 
